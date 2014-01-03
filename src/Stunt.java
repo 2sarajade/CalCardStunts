@@ -1,14 +1,16 @@
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 /**
  * Created by Shreyas Chand
  */
-public class Stunt {
+public class Stunt extends ImageIcon {
     private BufferedImage imageFile;
     private boolean animated;
     private BufferedImage[] animationFrames;
 
     public Stunt(BufferedImage imageFile) {
+        super(imageFile);
         setImage(imageFile);
     }
 

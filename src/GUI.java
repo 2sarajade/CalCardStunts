@@ -3,6 +3,8 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 /**
@@ -41,12 +43,11 @@ public class GUI extends JFrame{
     }
 
     private void displayNewStunt(Stunt stunt) {
-        final ImageIcon imageIcon = new ImageIcon(stunt.getImage());
-        final JLabel image = new JLabel(imageIcon);
+        final JLabel image = new JLabel(stunt);
+        image.addMouseListener(new MouseDeleteListener());
         stuntPanel.add(image);
         this.validate();
     }
-
 
     public void fileError() {
         System.out.println("Raising Awareness about File Errors");
@@ -71,5 +72,28 @@ public class GUI extends JFrame{
                 }
             }
         }
+    }
+
+    private class MouseDeleteListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent mouseEvent) {
+            JLabel label = (JLabel) mouseEvent.getSource();
+            Stunt stunt = (Stunt) label.getIcon();
+            controller.removeStunt(stunt);
+            stuntPanel.remove(label);
+            GUI.this.validate();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent mouseEvent) {}
+
+        @Override
+        public void mouseReleased(MouseEvent mouseEvent) {}
+
+        @Override
+        public void mouseEntered(MouseEvent mouseEvent) {}
+
+        @Override
+        public void mouseExited(MouseEvent mouseEvent) {}
     }
 }

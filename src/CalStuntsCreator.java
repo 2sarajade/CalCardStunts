@@ -33,4 +33,8 @@ public class CalStuntsCreator {
 
         return stunt;
     }
+
+    public void removeStunt(Stunt stunt) {
+        show.removeStunt(stunt);
+    }
 }
