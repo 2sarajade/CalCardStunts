@@ -1,41 +1,22 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by Shreyas Chand
  */
 public class StuntShow {
 
-    private HashMap<Integer, Stunt> stuntOrdering;
-    private int numberOfStunts;
+    private ArrayList<Stunt> stuntList;
 
     public StuntShow() {
-        this.stuntOrdering = new HashMap<Integer, Stunt>();
+        this.stuntList = new ArrayList<Stunt>();
     }
 
     public void addStunt(Stunt stunt) {
-        stuntOrdering.put(++numberOfStunts, stunt);
+        stuntList.add(stunt);
     }
 
     public void removeStunt(Stunt stunt) {
-        boolean stuntFound = false;
-        for (int i = 0; i < numberOfStunts; i++) {
-            if (stuntFound) {
-                Stunt otherStunt = stuntOrdering.get(i);
-                stuntOrdering.put(i - 1, otherStunt);
-            } else if (stuntOrdering.get(i) == stunt) {
-                stuntOrdering.remove(i);
-                stuntFound = true;
-            }
-        }
-        System.out.println(stuntOrdering.remove(numberOfStunts--));
-    }
-
-    public Stunt[] getStunts() {
-        Stunt[] stunts = new Stunt[numberOfStunts];
-        for (int i = 0; i < numberOfStunts; i++) {
-            stunts[i] = stuntOrdering.get(i);
-        }
-        return stunts;
+        stuntList.remove(stunt);
     }
 
 }
