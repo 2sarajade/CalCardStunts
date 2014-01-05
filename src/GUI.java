@@ -36,6 +36,10 @@ public class GUI extends JFrame{
         addStuntButton.addActionListener(new AddStuntListener());
         buttonPanel.add(addStuntButton);
 
+        final JButton generateStuntButton = new JButton("Generate Stunt");
+        generateStuntButton.addActionListener(new GenerateStuntListener());
+        buttonPanel.add(generateStuntButton);
+
         mainPanel.add(stuntPanel);
         mainPanel.add(buttonPanel);
 
@@ -95,5 +99,12 @@ public class GUI extends JFrame{
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {}
+    }
+
+    private class GenerateStuntListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            controller.printStuntDirections();
+        }
     }
 }

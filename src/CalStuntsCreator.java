@@ -37,4 +37,10 @@ public class CalStuntsCreator {
     public void removeStunt(Stunt stunt) {
         show.removeStunt(stunt);
     }
+
+    public void printStuntDirections() {
+        // print directions for each seat
+        System.out.println(show.getShowHeight());
+        System.out.println(show.getShowWidth());
+    }
 }

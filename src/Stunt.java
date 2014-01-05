@@ -9,6 +9,9 @@ public class Stunt extends ImageIcon {
     private boolean animated;
     private BufferedImage[] animationFrames;
 
+    private int stuntHeight;
+    private int stuntWidth;
+
     public Stunt(BufferedImage imageFile) {
         super(imageFile);
         setImage(imageFile);
@@ -28,6 +31,8 @@ public class Stunt extends ImageIcon {
 
     public void setImage(BufferedImage imageFile) {
         this.imageFile = imageFile;
+        this.stuntHeight = imageFile.getHeight();
+        this.stuntWidth = imageFile.getWidth();
     }
 
     public boolean isAnimated() {
@@ -37,5 +42,13 @@ public class Stunt extends ImageIcon {
     public void setAnimation(BufferedImage[] animationFrames) {
         this.animated = true;
         this.animationFrames = animationFrames;
+    }
+
+    public int getStuntHeight() {
+        return stuntHeight;
+    }
+
+    public int getStuntWidth() {
+        return stuntWidth;
     }
 }
