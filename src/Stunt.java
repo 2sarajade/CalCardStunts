@@ -51,4 +51,12 @@ public class Stunt extends ImageIcon {
     public int getStuntWidth() {
         return stuntWidth;
     }
+
+    public String getColor(int row, int seat) {
+        if (row > stuntHeight || seat > stuntWidth) {
+            return "N/A";
+        } else {
+            return String.valueOf(imageFile.getRGB(row, seat));
+        }
+    }
 }

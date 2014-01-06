@@ -38,4 +38,12 @@ public class StuntShow {
     public int getShowWidth() {
         return showWidth;
     }
+
+    public int getNumOfStunts() {
+        return stuntList.size();
+    }
+
+    public String getSeatColor(int stuntNum, int row, int seat) {
+        return stuntList.get(stuntNum).getColor(row, seat);
+    }
 }
