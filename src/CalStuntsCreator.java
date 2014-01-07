@@ -39,9 +39,6 @@ public class CalStuntsCreator {
     }
 
     public void printStuntDirections() {
-        // print directions for each seat
-        System.out.println(show.getShowHeight());
-        System.out.println(show.getShowWidth());
         for(int row = 0; row < show.getShowHeight(); row++) {
             for(int seat = 0; seat < show.getShowWidth(); seat++) {
                 System.out.println("Directions for Row " + (row + 1) + ", Seat " + (seat + 1) + ": ");
