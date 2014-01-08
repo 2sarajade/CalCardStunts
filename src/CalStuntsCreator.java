@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by Shreyas Chand
@@ -33,14 +34,22 @@ public class CalStuntsCreator {
         show.removeStunt(stunt);
     }
 
-    public void printStuntDirections() {
+    public void saveStuntDirections(String filename) throws IOException {
+        PrintWriter writer = new PrintWriter(filename, "UTF-8");
         for(int row = 0; row < show.getShowHeight(); row++) {
             for(int seat = 0; seat < show.getShowWidth(); seat++) {
+                writer.print((row + 1) + ", " + (seat + 1) + ", ");
                 System.out.println("Directions for Row " + (row + 1) + ", Seat " + (seat + 1) + ": ");
+                StringBuilder stuntsString = new StringBuilder();
                 for (int stunt = 0; stunt < show.getNumOfStunts(); stunt++) {
+                    stuntsString.append(show.getSeatColor(stunt, row, seat));
+                    stuntsString.append(", ");
                     System.out.println("\tStunt " + (stunt + 1) + ": " + show.getSeatColor(stunt, row, seat));
                 }
+                writer.println(stuntsString.substring(0, stuntsString.length() - 2));
+                writer.flush();
             }
         }
+        writer.close();
     }
 }
