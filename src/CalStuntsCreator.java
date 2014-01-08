@@ -20,14 +20,9 @@ public class CalStuntsCreator {
         this.gui = new GUI(this);
     }
 
-    public Stunt addStunt(File stuntImageFile) {
-        BufferedImage stuntImage = null;
-        try {
-            stuntImage = ImageIO.read(stuntImageFile);
-        } catch (IOException e) {
-            //e.printStackTrace();
-            gui.fileError();
-        }
+    public Stunt addStunt(File stuntImageFile) throws IOException {
+        BufferedImage stuntImage = ImageIO.read(stuntImageFile);
+
         final Stunt stunt = new Stunt(stuntImage);
         show.addStunt(stunt);
 

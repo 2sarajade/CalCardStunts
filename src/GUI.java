@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Shreyas Chand
@@ -71,7 +72,12 @@ public class GUI extends JFrame{
             if (choice == JFileChooser.APPROVE_OPTION) {
                 File[] files = fileChooser.getSelectedFiles();
                 for(File file : files) {
-                    final Stunt stunt = controller.addStunt(file);
+                    Stunt stunt = null;
+                    try {
+                        stunt = controller.addStunt(file);
+                    } catch (IOException e) {
+                        fileError();
+                    }
                     displayNewStunt(stunt);
                 }
             }
