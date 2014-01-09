@@ -110,11 +110,15 @@ public class GUI extends JFrame{
     private class GenerateStuntListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            // Do some GUI stuff to get filename and location
-            try {
-                controller.saveStuntDirections("stunts.csv");
-            } catch (IOException e) {
-                fileError();
+            JFileChooser fileChooser = new JFileChooser();
+
+            int choice = fileChooser.showSaveDialog(null);
+            if (choice == JFileChooser.APPROVE_OPTION) {
+                try {
+                    controller.saveStuntDirections(fileChooser.getSelectedFile());
+                } catch (IOException e) {
+                    fileError();
+                }
             }
         }
     }

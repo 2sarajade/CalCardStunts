@@ -34,8 +34,8 @@ public class CalStuntsCreator {
         show.removeStunt(stunt);
     }
 
-    public void saveStuntDirections(String filename) throws IOException {
-        PrintWriter writer = new PrintWriter(filename, "UTF-8");
+    public void saveStuntDirections(File file) throws IOException {
+        PrintWriter writer = new PrintWriter(file, "UTF-8");
         for(int row = 0; row < show.getShowHeight(); row++) {
             for(int seat = 0; seat < show.getShowWidth(); seat++) {
                 writer.print((row + 1) + ", " + (seat + 1) + ", ");
