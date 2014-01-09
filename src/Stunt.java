@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Created by Shreyas Chand
@@ -11,6 +12,21 @@ public class Stunt extends ImageIcon {
 
     private int stuntHeight;
     private int stuntWidth;
+
+    private static HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
+
+    static {
+        colorMap.put(-1, "White");
+        colorMap.put(-65536, "Red");
+        colorMap.put(-3840, "Yellow");
+        colorMap.put(-16776961, "Blue");
+        colorMap.put(-16777216, "Black");
+        //colorMap.put(, "Green");
+        colorMap.put(-26368, "Orange");
+        //colorMap.put(, "Purple");
+        //colorMap.put(, "Light Blue");
+        //colorMap.put(, "Brown");
+    }
 
     public Stunt(BufferedImage imageFile) {
         super(imageFile);
@@ -56,7 +72,12 @@ public class Stunt extends ImageIcon {
         if (row > stuntHeight || seat > stuntWidth) {
             return "N/A";
         } else {
-            return String.valueOf(imageFile.getRGB(seat, (stuntHeight - 1) - row));
+            int colorCode = imageFile.getRGB(seat, (stuntHeight - 1) - row);
+            if (colorMap.containsKey(colorCode)) {
+                return colorMap.get(colorCode);
+            } else {
+                return String.valueOf(colorCode);
+            }
         }
     }
 }
