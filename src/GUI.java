@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +16,13 @@ public class GUI extends JFrame{
 
     private CalStuntsCreator controller;
     private JPanel stuntPanel;
+
+    private JButton moveLeftButton;
+    private JButton moveRightButton;
+
+    private Stunt selectedStunt;
+    private JLabel selectedStuntLabel;
+
 
     public GUI(CalStuntsCreator controller) {
         this.controller = controller;
@@ -41,6 +49,18 @@ public class GUI extends JFrame{
         generateStuntButton.addActionListener(new GenerateStuntListener());
         buttonPanel.add(generateStuntButton);
 
+        moveLeftButton = new JButton("<-");
+        moveLeftButton.addActionListener(new MoveListener());
+        buttonPanel.add(moveLeftButton);
+
+        final JButton deleteStuntButton= new JButton("Delete Stunt");
+        deleteStuntButton.addActionListener(new DeleteListener());
+        buttonPanel.add(deleteStuntButton);
+
+        moveRightButton = new JButton("->");
+        moveRightButton.addActionListener(new MoveListener());
+        buttonPanel.add(moveRightButton);
+
         mainPanel.add(stuntPanel);
         mainPanel.add(buttonPanel);
 
@@ -49,7 +69,8 @@ public class GUI extends JFrame{
 
     private void displayNewStunt(Stunt stunt) {
         final JLabel image = new JLabel(stunt);
-        image.addMouseListener(new MouseDeleteListener());
+        image.addMouseListener(new MouseClickListener());
+        image.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         stuntPanel.add(image);
         this.validate();
     }
@@ -84,14 +105,33 @@ public class GUI extends JFrame{
         }
     }
 
-    private class MouseDeleteListener implements MouseListener {
+    private class GenerateStuntListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFileChooser fileChooser = new JFileChooser();
+
+            int choice = fileChooser.showSaveDialog(null);
+            if (choice == JFileChooser.APPROVE_OPTION) {
+                try {
+                    controller.saveStuntDirections(fileChooser.getSelectedFile());
+                } catch (IOException e) {
+                    fileError();
+                }
+            }
+        }
+    }
+
+    private class MouseClickListener implements MouseListener {
+
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
-            JLabel label = (JLabel) mouseEvent.getSource();
-            Stunt stunt = (Stunt) label.getIcon();
-            controller.removeStunt(stunt);
-            stuntPanel.remove(label);
-            GUI.this.validate();
+            if (selectedStunt != null) {
+                selectedStuntLabel.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+            }
+            selectedStuntLabel = (JLabel) mouseEvent.getSource();
+            selectedStuntLabel.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
+            selectedStunt = (Stunt) selectedStuntLabel.getIcon();
+
         }
 
         @Override
@@ -105,20 +145,29 @@ public class GUI extends JFrame{
 
         @Override
         public void mouseExited(MouseEvent mouseEvent) {}
+
     }
 
-    private class GenerateStuntListener implements ActionListener {
+    private class MoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            JFileChooser fileChooser = new JFileChooser();
+            if (actionEvent.getSource() == moveLeftButton) {
 
-            int choice = fileChooser.showSaveDialog(null);
-            if (choice == JFileChooser.APPROVE_OPTION) {
-                try {
-                    controller.saveStuntDirections(fileChooser.getSelectedFile());
-                } catch (IOException e) {
-                    fileError();
-                }
+            } else { // moveRightButton
+
+            }
+        }
+    }
+
+    private class DeleteListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (selectedStunt != null) {
+                controller.removeStunt(selectedStunt);
+                stuntPanel.remove(selectedStuntLabel);
+                selectedStunt = null;
+                selectedStuntLabel = null;
+                GUI.this.validate();
             }
         }
     }
