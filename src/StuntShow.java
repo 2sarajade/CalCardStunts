@@ -46,4 +46,21 @@ public class StuntShow {
     public String getSeatColor(int stuntNum, int row, int seat) {
         return stuntList.get(stuntNum).getColor(row, seat);
     }
+
+    public ArrayList<Stunt> getStunts() {
+        return stuntList;
+    }
+
+    public int getStuntPosition(Stunt stunt) {
+        for (int i = 0; i < stuntList.size(); i++) {
+            if (stuntList.get(i) == stunt) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void insertStunt(Stunt stunt, int index) {
+        stuntList.add(index, stunt);
+    }
 }

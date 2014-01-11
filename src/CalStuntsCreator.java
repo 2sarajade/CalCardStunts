@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * Created by Shreyas Chand
@@ -51,5 +52,20 @@ public class CalStuntsCreator {
             }
         }
         writer.close();
+    }
+
+    public ArrayList<Stunt> getAllStunts() {
+        return show.getStunts();
+    }
+
+    public int getStuntPosition(Stunt stunt) {
+        return show.getStuntPosition(stunt);
+    }
+
+    public void setStuntPosition(Stunt stunt, int index) {
+        if (index >= 0 && index < show.getNumOfStunts()) {
+            show.removeStunt(stunt);
+            show.insertStunt(stunt, index);
+        }
     }
 }

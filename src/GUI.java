@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Shreyas Chand
@@ -73,6 +74,14 @@ public class GUI extends JFrame{
         image.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
         stuntPanel.add(image);
         this.validate();
+    }
+
+    private void refreshDisplayedStunts() {
+        stuntPanel.removeAll();
+        ArrayList<Stunt> stunts = controller.getAllStunts();
+        for (Stunt stunt : stunts) {
+            displayNewStunt(stunt);
+        }
     }
 
     public void fileError() {
@@ -151,11 +160,17 @@ public class GUI extends JFrame{
     private class MoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            if (actionEvent.getSource() == moveLeftButton) {
-
-            } else { // moveRightButton
-
+            if (selectedStunt == null) {
+                return;
             }
+            int currPosition = controller.getStuntPosition(selectedStunt);
+            if (actionEvent.getSource() == moveLeftButton) {
+                controller.setStuntPosition(selectedStunt, currPosition - 1);
+            } else { // moveRightButton
+                controller.setStuntPosition(selectedStunt, currPosition + 1);
+            }
+            refreshDisplayedStunts();
+            GUI.this.validate();
         }
     }
 
