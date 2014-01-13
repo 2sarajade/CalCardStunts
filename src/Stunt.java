@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by Shreyas Chand
  */
-public class Stunt extends ImageIcon {
+public class Stunt extends JLabel {
     private BufferedImage imageFile;
     private boolean animated;
     private BufferedImage[] animationFrames;
@@ -29,7 +29,8 @@ public class Stunt extends ImageIcon {
     }
 
     public Stunt(BufferedImage imageFile) {
-        super(imageFile);
+        super(new ImageIcon(imageFile));
+        this.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         setImage(imageFile);
     }
 

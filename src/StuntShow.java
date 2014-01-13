@@ -63,4 +63,11 @@ public class StuntShow {
     public void insertStunt(Stunt stunt, int index) {
         stuntList.add(index, stunt);
     }
+
+    public void setStuntPosition(Stunt stunt, int index) {
+        if (index >= 0 && index < getNumOfStunts()) {
+            removeStunt(stunt);
+            insertStunt(stunt, index);
+        }
+    }
 }
