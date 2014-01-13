@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Shreyas Chand
  */
-public class CalStuntsCreator extends JFrame{
+public class CalStuntsCreator extends JFrame {
 
     private StuntShow show;
 
@@ -60,7 +60,7 @@ public class CalStuntsCreator extends JFrame{
         moveLeftButton.addActionListener(new MoveListener());
         buttonPanel.add(moveLeftButton);
 
-        final JButton deleteStuntButton= new JButton("Delete Stunt");
+        final JButton deleteStuntButton = new JButton("Delete Stunt");
         deleteStuntButton.addActionListener(new DeleteListener());
         buttonPanel.add(deleteStuntButton);
 
@@ -72,6 +72,19 @@ public class CalStuntsCreator extends JFrame{
         mainPanel.add(buttonPanel);
 
         return mainPanel;
+    }
+
+    public void fileError() {
+        System.out.println("Raising Awareness about File Errors");
+    }
+
+    public Stunt addStunt(File stuntImageFile) throws IOException {
+        BufferedImage stuntImage = ImageIO.read(stuntImageFile);
+
+        final Stunt stunt = new Stunt(stuntImage);
+        show.addStunt(stunt);
+
+        return stunt;
     }
 
     private void displayNewStunt(Stunt stunt) {
@@ -88,66 +101,10 @@ public class CalStuntsCreator extends JFrame{
         }
     }
 
-    public void fileError() {
-        System.out.println("Raising Awareness about File Errors");
-    }
-
-    private class AddStuntListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            final JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            fileChooser.setMultiSelectionEnabled(true);
-            final FileFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "bmp", "gif");
-            fileChooser.setFileFilter(filter);
-
-            final int choice = fileChooser.showOpenDialog(null);
-
-            if (choice == JFileChooser.APPROVE_OPTION) {
-                File[] files = fileChooser.getSelectedFiles();
-                for(File file : files) {
-                    Stunt stunt = null;
-                    try {
-                        stunt = this.addStunt(file);
-                    } catch (IOException e) {
-                        fileError();
-                    }
-                    displayNewStunt(stunt);
-                }
-            }
-        }
-
-
-        public Stunt addStunt(File stuntImageFile) throws IOException {
-            BufferedImage stuntImage = ImageIO.read(stuntImageFile);
-
-            final Stunt stunt = new Stunt(stuntImage);
-            show.addStunt(stunt);
-
-            return stunt;
-        }
-    }
-
-    private class GenerateStuntListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            JFileChooser fileChooser = new JFileChooser();
-
-            int choice = fileChooser.showSaveDialog(null);
-            if (choice == JFileChooser.APPROVE_OPTION) {
-                try {
-                    CalStuntsCreator.this.saveStuntDirections(fileChooser.getSelectedFile());
-                } catch (IOException e) {
-                    fileError();
-                }
-            }
-        }
-    }
-
     public void saveStuntDirections(File file) throws IOException {
         PrintWriter writer = new PrintWriter(file, "UTF-8");
-        for(int row = 0; row < show.getShowHeight(); row++) {
-            for(int seat = 0; seat < show.getShowWidth(); seat++) {
+        for (int row = 0; row < show.getShowHeight(); row++) {
+            for (int seat = 0; seat < show.getShowWidth(); seat++) {
                 writer.print((row + 1) + ", " + (seat + 1) + ", ");
                 System.out.println("Directions for Row " + (row + 1) + ", Seat " + (seat + 1) + ": ");
                 StringBuilder stuntsString = new StringBuilder();
@@ -163,12 +120,56 @@ public class CalStuntsCreator extends JFrame{
         writer.close();
     }
 
+    private class AddStuntListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            final JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setMultiSelectionEnabled(true);
+            final FileFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "bmp", "gif");
+            fileChooser.setFileFilter(filter);
+
+            final int choice = fileChooser.showOpenDialog(null);
+
+            if (choice == JFileChooser.APPROVE_OPTION) {
+                File[] files = fileChooser.getSelectedFiles();
+                for (File file : files) {
+                    Stunt stunt = null;
+                    try {
+                        stunt = CalStuntsCreator.this.addStunt(file);
+                    } catch (IOException e) {
+                        fileError();
+                    }
+                    displayNewStunt(stunt);
+                }
+            }
+        }
+
+    }
+
+    private class GenerateStuntListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFileChooser fileChooser = new JFileChooser();
+
+            int choice = fileChooser.showSaveDialog(null);
+            if (choice == JFileChooser.APPROVE_OPTION) {
+                try {
+                    saveStuntDirections(fileChooser.getSelectedFile());
+                } catch (IOException e) {
+                    fileError();
+                }
+            }
+        }
+
+    }
+
     private class MouseClickListener implements MouseListener {
 
         @Override
         public void mouseClicked(MouseEvent mouseEvent) {
             if (selectedStunt != null) {
-                selectedStunt.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+                selectedStunt.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
             }
             selectedStunt = (Stunt) mouseEvent.getSource();
             selectedStunt.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2));
