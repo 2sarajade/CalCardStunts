@@ -44,15 +44,15 @@ public class CalStuntsCreator extends JFrame {
     }
 
     private JPanel prepareContents() {
-        final JPanel mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
         stuntPanel = new JPanel();
-        final JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
 
-        final JButton addStuntButton = new JButton("Add Stunt");
+        JButton addStuntButton = new JButton("Add Stunt");
         addStuntButton.addActionListener(new AddStuntListener());
         buttonPanel.add(addStuntButton);
 
-        final JButton generateStuntButton = new JButton("Generate Stunt");
+        JButton generateStuntButton = new JButton("Generate Stunt");
         generateStuntButton.addActionListener(new GenerateStuntListener());
         buttonPanel.add(generateStuntButton);
 
@@ -60,7 +60,7 @@ public class CalStuntsCreator extends JFrame {
         moveLeftButton.addActionListener(new MoveListener());
         buttonPanel.add(moveLeftButton);
 
-        final JButton deleteStuntButton = new JButton("Delete Stunt");
+        JButton deleteStuntButton = new JButton("Delete Stunt");
         deleteStuntButton.addActionListener(new DeleteListener());
         buttonPanel.add(deleteStuntButton);
 
@@ -81,7 +81,7 @@ public class CalStuntsCreator extends JFrame {
     public Stunt addStunt(File stuntImageFile) throws IOException {
         BufferedImage stuntImage = ImageIO.read(stuntImageFile);
 
-        final Stunt stunt = new Stunt(stuntImage);
+        Stunt stunt = new Stunt(stuntImage);
         show.addStunt(stunt);
 
         return stunt;
@@ -123,13 +123,13 @@ public class CalStuntsCreator extends JFrame {
     private class AddStuntListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            final JFileChooser fileChooser = new JFileChooser();
+            JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fileChooser.setMultiSelectionEnabled(true);
-            final FileFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "bmp", "gif");
+            FileFilter filter = new FileNameExtensionFilter("Image Files", "png", "jpg", "bmp", "gif");
             fileChooser.setFileFilter(filter);
 
-            final int choice = fileChooser.showOpenDialog(null);
+            int choice = fileChooser.showOpenDialog(null);
 
             if (choice == JFileChooser.APPROVE_OPTION) {
                 File[] files = fileChooser.getSelectedFiles();
