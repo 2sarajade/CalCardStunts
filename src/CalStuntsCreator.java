@@ -44,32 +44,34 @@ public class CalStuntsCreator extends JFrame {
     }
 
     private JPanel prepareContents() {
-        JPanel mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel(new BorderLayout());
         stuntPanel = new JPanel();
-        JPanel buttonPanel = new JPanel();
+        JPanel functionButtons = new JPanel();
+        JPanel movementButtons = new JPanel();
 
         JButton addStuntButton = new JButton("Add Stunt");
         addStuntButton.addActionListener(new AddStuntListener());
-        buttonPanel.add(addStuntButton);
+        functionButtons.add(addStuntButton);
 
         JButton generateStuntButton = new JButton("Generate Stunt");
         generateStuntButton.addActionListener(new GenerateStuntListener());
-        buttonPanel.add(generateStuntButton);
+        functionButtons.add(generateStuntButton);
 
         moveLeftButton = new JButton("<-");
         moveLeftButton.addActionListener(new MoveListener());
-        buttonPanel.add(moveLeftButton);
+        movementButtons.add(moveLeftButton);
 
         JButton deleteStuntButton = new JButton("Delete Stunt");
         deleteStuntButton.addActionListener(new DeleteListener());
-        buttonPanel.add(deleteStuntButton);
+        movementButtons.add(deleteStuntButton);
 
         moveRightButton = new JButton("->");
         moveRightButton.addActionListener(new MoveListener());
-        buttonPanel.add(moveRightButton);
+        movementButtons.add(moveRightButton);
 
-        mainPanel.add(stuntPanel);
-        mainPanel.add(buttonPanel);
+        mainPanel.add(stuntPanel, BorderLayout.CENTER);
+        mainPanel.add(movementButtons, BorderLayout.SOUTH);
+        mainPanel.add(functionButtons, BorderLayout.NORTH);
 
         return mainPanel;
     }
