@@ -76,8 +76,9 @@ public class CalStuntsCreator extends JFrame {
         return mainPanel;
     }
 
-    public void fileError() {
+    public void showFileError(String errorMessage) {
         System.out.println("Raising Awareness about File Errors");
+        JOptionPane.showMessageDialog(this, errorMessage, "An Error Occurred", JOptionPane.ERROR_MESSAGE);
     }
 
     public Stunt addStunt(File stuntImageFile) throws IOException {
@@ -140,7 +141,7 @@ public class CalStuntsCreator extends JFrame {
                     try {
                         stunt = CalStuntsCreator.this.addStunt(file);
                     } catch (IOException e) {
-                        fileError();
+                        showFileError("Whoops! I couldn't open " + file.getName() + ". Maybe something is wrong with it.");
                     }
                     displayNewStunt(stunt);
                 }
@@ -159,7 +160,7 @@ public class CalStuntsCreator extends JFrame {
                 try {
                     saveStuntDirections(fileChooser.getSelectedFile());
                 } catch (IOException e) {
-                    fileError();
+                    showFileError("Uh oh! I couldn't save that file.");
                 }
             }
         }
