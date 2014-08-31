@@ -109,12 +109,10 @@ public class CalStuntsCreator extends JFrame {
         for (int row = 0; row < show.getShowHeight(); row++) {
             for (int seat = 0; seat < show.getShowWidth(); seat++) {
                 writer.print((row + 1) + ", " + (seat + 1) + ", ");
-                System.out.println("Directions for Row " + (row + 1) + ", Seat " + (seat + 1) + ": ");
                 StringBuilder stuntsString = new StringBuilder();
                 for (int stunt = 0; stunt < show.getNumOfStunts(); stunt++) {
                     stuntsString.append(show.getSeatColor(stunt, row, seat));
                     stuntsString.append(", ");
-                    System.out.println("\tStunt " + (stunt + 1) + ": " + show.getSeatColor(stunt, row, seat));
                 }
                 writer.println(stuntsString.substring(0, stuntsString.length() - 2));
                 writer.flush();
