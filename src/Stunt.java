@@ -16,16 +16,16 @@ public class Stunt extends JLabel {
     private static HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
 
     static {
-        colorMap.put(-1, "White");
-        colorMap.put(-65536, "Red");
-        colorMap.put(-3840, "Yellow");
         colorMap.put(-16776961, "Blue");
+        colorMap.put(-256, "Yellow");
+        colorMap.put(-65536, "Red");
+        colorMap.put(-1, "White");
         colorMap.put(-16777216, "Black");
-        //colorMap.put(, "Green");
+        colorMap.put(-16724992, "Green");
         colorMap.put(-26368, "Orange");
-        //colorMap.put(, "Purple");
-        //colorMap.put(, "Light Blue");
-        //colorMap.put(, "Brown");
+        colorMap.put(-8388480, "Purple");
+        colorMap.put(-16711681, "Light Blue");
+        colorMap.put(-6724096, "Brown");
     }
 
     public Stunt(BufferedImage imageFile) {
