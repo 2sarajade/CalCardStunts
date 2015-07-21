@@ -7,13 +7,11 @@ import java.util.HashMap;
  */
 public class Stunt extends JLabel {
     private BufferedImage imageFile;
-    private boolean animated;
-    private BufferedImage[] animationFrames;
 
     private int stuntHeight;
     private int stuntWidth;
 
-    private static HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
+    private static final HashMap<Integer, String> colorMap = new HashMap<Integer, String>();
 
     static {
         colorMap.put(-16776961, "Blue");
@@ -34,31 +32,10 @@ public class Stunt extends JLabel {
         setImage(imageFile);
     }
 
-    public Stunt(BufferedImage[] imageFiles) {
-        setAnimation(imageFiles);
-    }
-
-    public BufferedImage getImage() {
-        return imageFile;
-    }
-
-    public BufferedImage[] getAnimation() {
-        return animationFrames;
-    }
-
     public void setImage(BufferedImage imageFile) {
         this.imageFile = imageFile;
         this.stuntHeight = imageFile.getHeight();
         this.stuntWidth = imageFile.getWidth();
-    }
-
-    public boolean isAnimated() {
-        return animated;
-    }
-
-    public void setAnimation(BufferedImage[] animationFrames) {
-        this.animated = true;
-        this.animationFrames = animationFrames;
     }
 
     public int getStuntHeight() {

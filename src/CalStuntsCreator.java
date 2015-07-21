@@ -38,7 +38,7 @@ public class CalStuntsCreator extends JFrame {
 
     private void setup() {
         getContentPane().add(prepareContents());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(640, 480);
         setVisible(true);
     }
@@ -77,7 +77,7 @@ public class CalStuntsCreator extends JFrame {
     }
 
     public void showFileError(String errorMessage) {
-        System.out.println("Raising Awareness about File Errors");
+        System.out.println("File Error");
         JOptionPane.showMessageDialog(this, errorMessage, "An Error Occurred", JOptionPane.ERROR_MESSAGE);
     }
 
@@ -200,7 +200,7 @@ public class CalStuntsCreator extends JFrame {
             int currPosition = show.getStuntPosition(selectedStunt);
             if (actionEvent.getSource() == moveLeftButton) {
                 show.setStuntPosition(selectedStunt, currPosition - 1);
-            } else { // moveRightButton
+            } else if (actionEvent.getSource() == moveRightButton) {
                 show.setStuntPosition(selectedStunt, currPosition + 1);
             }
             refreshDisplayedStunts();
