@@ -1,3 +1,5 @@
+package com.shreyaschand.ucrc.stunts;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
