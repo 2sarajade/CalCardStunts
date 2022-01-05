@@ -26,6 +26,8 @@ public class Stunt extends JLabel {
         colorMap.put(-8388480, "Purple");
         colorMap.put(-16711681, "Light Blue");
         colorMap.put(-6724096, "Brown");
+        colorMap.put(-367147, "Pink");
+        colorMap.put(-7566452, "Grey");
     }
 
     public Stunt(BufferedImage imageFile) {

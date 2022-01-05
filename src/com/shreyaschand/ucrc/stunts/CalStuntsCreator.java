@@ -51,11 +51,11 @@ public class CalStuntsCreator extends JFrame {
         JPanel functionButtons = new JPanel();
         JPanel movementButtons = new JPanel();
 
-        JButton addStuntButton = new JButton("Add com.shreyaschand.ucrc.stunts.Stunt");
+        JButton addStuntButton = new JButton("Add Stunt");
         addStuntButton.addActionListener(new AddStuntListener());
         functionButtons.add(addStuntButton);
 
-        JButton generateStuntButton = new JButton("Generate com.shreyaschand.ucrc.stunts.Stunt");
+        JButton generateStuntButton = new JButton("Generate Stunt");
         generateStuntButton.addActionListener(new GenerateStuntListener());
         functionButtons.add(generateStuntButton);
 
@@ -63,7 +63,7 @@ public class CalStuntsCreator extends JFrame {
         moveLeftButton.addActionListener(new MoveListener());
         movementButtons.add(moveLeftButton);
 
-        JButton deleteStuntButton = new JButton("Delete com.shreyaschand.ucrc.stunts.Stunt");
+        JButton deleteStuntButton = new JButton("Delete Stunt");
         deleteStuntButton.addActionListener(new DeleteListener());
         movementButtons.add(deleteStuntButton);
 
