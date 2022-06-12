@@ -108,6 +108,17 @@ public class CalStuntsCreator extends JFrame {
 
     public void saveStuntDirections(File file) throws IOException {
         PrintWriter writer = new PrintWriter(file, "UTF-8");
+
+        writer.print("Row_Number, Seat_Number" + ", ");
+        StringBuilder headerString = new StringBuilder();
+        for (int stuntNumber = 1; stuntNumber <= show.getNumOfStunts(); stuntNumber++) {
+            headerString.append("Stunt_");
+            headerString.append(stuntNumber);
+            headerString.append("_Color, ");
+        }
+        writer.println(headerString.substring(0, headerString.length() - 2));
+        writer.flush();
+
         for (int row = 0; row < show.getShowHeight(); row++) {
             for (int seat = 0; seat < show.getShowWidth(); seat++) {
                 writer.print((row + 1) + ", " + (seat + 1) + ", ");
